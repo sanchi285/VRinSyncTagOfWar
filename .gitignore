@@ -1,0 +1,52 @@
+# Unity folders to ignore
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+
+# Visual Studio / VSCode / Rider files
+.vs/
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Unity generated files
+*.csproj
+*.sln
+*.user
+*.unityproj
+*.pidb
+*.booproj
+
+# Others
+*.pidb.meta
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb
+
+# JetBrains Rider
+.idea/
+
+# Mono auto-generated files
+*.mdb
+*.exe
+*.dll
+*.pdb
+*.cache
+*.ilk
+*.meta
+
+# Crashlytics
+*.apk
+*.unitypackage
+
+# Package Manager
+Packages/packages-lock.json
