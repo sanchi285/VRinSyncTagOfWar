@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 124a4ba60bbab04438ecce14776643b1
+  - enabled: 1
+    path: Assets/VRSYS/Core/Demo/Demo Scenes/Single-Scene Setup/VRSYS-SingleScene.unity
+    guid: b696740ea170a5840baa71d36430d7a2
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 578878cbdf4d866479d9ba7eda114a4d, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e0b66aeb4da120a408fa35ca73c03a41, type: 2}
