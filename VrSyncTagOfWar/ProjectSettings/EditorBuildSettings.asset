@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/VRSYS-SingleScene.unity
     guid: 632c2651b0ae917459a8e1f339934baa
   m_configObjects:
-    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 379abc177903a6048a0c70026c26f7f3, type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 9f600cc6e0063b44aaad59f74df3584d, type: 2}
-    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: b6dc9405ae7ae4947a18b397a492a7a1, type: 2}
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 578878cbdf4d866479d9ba7eda114a4d, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e0b66aeb4da120a408fa35ca73c03a41, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: be05724d046fb29478c9a5ccbcfe1690, type: 2}
