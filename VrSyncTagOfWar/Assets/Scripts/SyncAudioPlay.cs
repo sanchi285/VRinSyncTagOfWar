@@ -17,12 +17,32 @@ public class SynchronizedMusicPlayer : NetworkBehaviour
 
     private void Start()
     {
+        Debug.Log($"[{name}] NetworkObject: {GetComponent<NetworkObject>()}, IsSpawned: {GetComponent<NetworkObject>()?.IsSpawned}");
         if (audioSource == null)
             audioSource = GetComponent<AudioSource>();
         if (musicClip != null)
             audioSource.clip = musicClip;
 
         // Button only visible to Host
+        /*if (hostStartButton != null)
+        {
+            if (IsHost)
+            {
+                hostStartButton.onClick.AddListener(HostStartPlayback);
+                hostStartButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                hostStartButton.gameObject.SetActive(false);
+            }
+        }
+        */
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        Debug.Log($"OnNetworkSpawn: IsHost = {IsHost}, IsServer = {IsServer}, IsClient = {IsClient}");
+        //base.OnNetworkSpawn();
         if (hostStartButton != null)
         {
             if (IsHost)
@@ -40,6 +60,8 @@ public class SynchronizedMusicPlayer : NetworkBehaviour
     // Host call and play music 
     public async void HostStartPlayback()
     {
+        Debug.Log("HostStartPlayback clicked!");
+
         DateTime ntpTime = await GetNtpTimeAsync();
         DateTime playbackTime = ntpTime.AddSeconds(10); // wait for 10 sec 
         long fileTimeUtc = playbackTime.ToFileTimeUtc();
@@ -51,12 +73,15 @@ public class SynchronizedMusicPlayer : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void SetPlaybackTimeServerRpc(long fileTimeUtc)
     {
+        Debug.Log("ServerRpc called - IsServer = " + IsServer + ", IsClient = " + IsClient + ", IsHost = " + IsHost);
+        Debug.Log("Server received playback time: " + fileTimeUtc);
         BroadcastPlaybackTimeClientRpc(fileTimeUtc);
     }
 
     [ClientRpc]
     private void BroadcastPlaybackTimeClientRpc(long fileTimeUtc)
     {
+        Debug.Log("Client received playback time: " + fileTimeUtc);
         DateTime playbackTime = DateTime.FromFileTimeUtc(fileTimeUtc);
         _ = WaitUntilPlaybackTime(playbackTime);
     }
@@ -68,12 +93,12 @@ public class SynchronizedMusicPlayer : NetworkBehaviour
 
         if (delayMs > 0)
         {
-            Debug.Log($"⏳ Waiting {delayMs:F0}ms until synchronized playback at {targetUtcTime:HH:mm:ss.fff}");
+            Debug.Log($"Waiting {delayMs:F0}ms until synchronized playback at {targetUtcTime:HH:mm:ss.fff}");
             await Task.Delay((int)delayMs);
         }
 
         audioSource.Play();
-        Debug.Log("▶️ Music started at " + DateTime.UtcNow.ToString("HH:mm:ss.fff"));
+        Debug.Log("Music started at " + DateTime.UtcNow.ToString("HH:mm:ss.fff"));
     }
 
     private async Task<DateTime> GetNtpTimeAsync()
